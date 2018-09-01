@@ -1,6 +1,4 @@
-// Copyright 2017 TED@Sogou, Inc. All rights reserved.
-//
-// @Author: wangzhongning@sogou-inc.com
+// @Author: wangzn04@gmail.com
 // @Date: 2017-08-30 13:47:39
 
 package os
@@ -11,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"git.sogou-inc.com/wangzhongning/goutils/myhttp"
+	"github.com/wangzn/goutils/myhttp"
 )
 
 // FileGetContents reads data from a FS file or HTTP endpoint

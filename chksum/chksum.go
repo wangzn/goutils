@@ -1,6 +1,4 @@
-// Copyright 2017 TED@Sogou, Inc. All rights reserved.
-//
-// @Author: wangzhongning@sogou-inc.com
+// @Author: wangzn04@gmail.com
 // @Date: 2017-09-07 15:24:01
 
 package chksum

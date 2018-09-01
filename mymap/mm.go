@@ -1,6 +1,4 @@
-// Copyright 2018 TED@Sogou, Inc. All rights reserved.
-
-// @Author: wangzhongning@sogou-inc.com
+// @Author: wangzn04@gmail.com
 // @Date: 2018-08-13 15:35:51
 
 package mymap

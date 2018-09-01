@@ -1,6 +1,4 @@
-// Copyright 2017 TED@Sogou, Inc. All rights reserved.
-//
-// @Author: wangzhongning@sogou-inc.com
+// @Author: wangzn04@gmail.com
 // @Date: 2017-08-10 21:22:52
 
 package structs
