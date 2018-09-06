@@ -4,8 +4,12 @@
 package mymap
 
 import (
+	"bytes"
+	"encoding/json"
 	"strconv"
 	"strings"
+
+	"github.com/olekukonko/tablewriter"
 )
 
 // ParseMaps parses a string to a map[string]string
@@ -58,4 +62,92 @@ func StringMustFloat64(m map[string]string, k string) float64 {
 		return def
 	}
 	return f
+}
+
+// FormatSlices returns the string of slices
+func FormatSlices(header []string, body [][]string, format string) string {
+	res := ""
+	switch format {
+	case "json":
+		bs, _ := json.Marshal(body)
+		res = string(bs)
+	default:
+		if len(body) == 0 {
+			return res
+		}
+		b := new(bytes.Buffer)
+		table := tablewriter.NewWriter(b)
+		table.SetHeader(header)
+		for _, r := range body {
+			table.Append(r)
+		}
+		if len(header) > 2 {
+			total := make([]string, len(header))
+			total[len(total)-1] = strconv.Itoa(len(body))
+			total[len(total)-2] = "TOTAL"
+			table.SetFooter(total)
+		}
+		table.Render()
+		res = b.String()
+	}
+	return res
+}
+
+// FormatMapslice returns the string of mapslice
+func FormatMapslice(rs []map[string]string, format string) string {
+	res := ""
+	if rs == nil {
+		return res
+	}
+	switch format {
+	case "json":
+		bs, _ := json.Marshal(rs)
+		res = string(bs)
+	default:
+		if len(rs) == 0 {
+			return res
+		}
+		b := new(bytes.Buffer)
+		table := tablewriter.NewWriter(b)
+		header := MapKeys(rs[0])
+		table.SetHeader(header)
+		for _, r := range rs {
+			table.Append(MapValues(r, header))
+		}
+		if len(header) > 2 {
+			total := make([]string, len(header))
+			total[len(total)-1] = strconv.Itoa(len(rs))
+			total[len(total)-2] = "TOTAL"
+			table.SetFooter(total)
+		}
+		table.Render()
+		res = b.String()
+	}
+	return res
+}
+
+// MapKeys returns the keys of a map
+func MapKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
+// MapValues returns the values of a map
+func MapValues(m map[string]string, ks []string) []string {
+	vs := make([]string, 0, len(m))
+	if ks == nil || len(ks) == 0 {
+		for _, v := range m {
+			vs = append(vs, v)
+		}
+	} else {
+		for _, k := range ks {
+			if v, ok := m[k]; ok {
+				vs = append(vs, v)
+			}
+		}
+	}
+	return vs
 }
