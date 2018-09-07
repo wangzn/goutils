@@ -1,7 +1,7 @@
 // @Author: wangzn04@gmail.com
 // @Date: 2017-08-30 13:47:39
 
-package os
+package sys
 
 import (
 	"bufio"
